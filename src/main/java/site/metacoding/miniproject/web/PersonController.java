@@ -1,6 +1,9 @@
 package site.metacoding.miniproject.web;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject.domain.user.User;
 import site.metacoding.miniproject.service.PersonService;
 import site.metacoding.miniproject.service.UserService;
+import site.metacoding.miniproject.util.BasicSkillList;
 import site.metacoding.miniproject.web.dto.request.PersonJoinDto;
 import site.metacoding.miniproject.web.dto.response.CMRespDto;
 
@@ -30,4 +34,11 @@ public class PersonController {
 		return new CMRespDto<>(1, "회원가입 성공", null);
 	}
 
+	//개인 회원가입 페이지
+	@GetMapping("/personJoinForm")
+	public String  perseonJoinForm(Model model) {
+		model.addAttribute("skillList",BasicSkillList.getSkill());
+		return "person/personJoinForm";
+
+	}
 }
