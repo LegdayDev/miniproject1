@@ -70,9 +70,8 @@
 						<li class="nav-item"><a class="nav-link" href="index.html">구독 페이지</a></li>
 						<c:if test="${principal == null }">
 							<li class="nav-item" style="margin: 0 30px 0 30px;"><a href="/loginForm">
-									<button id="btnUpdate" type="button" class="btn btn-primary">로그인</button>
+									<button id="btnUpdate" type="button" class="btn btn-primary">로그인/회원가입</button>
 							</a></li>
-							<li class="nav-item"><button id="btnUpdate" type="button" class="btn btn-primary">회원가입</button></li>
 						</c:if>
 						<c:if test="${principal != null}">
 							<li class="nav-item"><a href="/logout"><button id="btnUpdate" type="button"
