@@ -1,6 +1,6 @@
 package site.metacoding.miniproject.web;
 
-import java.util.List;
+
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,11 +26,13 @@ public class PersonController {
 
 	@PostMapping("/person/join")
 	public @ResponseBody CMRespDto<?> joinPerson(@RequestBody PersonJoinDto personJoinDto) {
-		personService.회원가입(personJoinDto);
+			
+		
 		User userPS = userService.유저네임으로유저찾기(personJoinDto.getUsername());
-		if (userPS == null) {
+		if (userPS != null) {
 			return new CMRespDto<>(-1, "회원가입 실패", null);
 		}
+		personService.회원가입(personJoinDto);
 		return new CMRespDto<>(1, "회원가입 성공", null);
 	}
 
