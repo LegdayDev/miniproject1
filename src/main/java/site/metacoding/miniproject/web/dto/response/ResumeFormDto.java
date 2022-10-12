@@ -9,6 +9,7 @@ import site.metacoding.miniproject.domain.person_skill.PersonSkill;
 @Getter
 @AllArgsConstructor
 public class ResumeFormDto {
+    private Integer personId;
     private String personName;
     private String personEmail;
     private String degree;

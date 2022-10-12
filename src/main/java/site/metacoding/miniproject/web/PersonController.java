@@ -34,14 +34,14 @@ public class PersonController {
 		return new CMRespDto<>(1, "회원가입 성공", null);
 	}
 
-	@GetMapping("/person/resumeWrite/{id}")
+	@GetMapping("/person/resumeWrite/{personId}")
 	public String resumeForm(@PathVariable Integer personId, Model model) {
 		ResumeFormDto personPS = personService.이력서내용가져오기(personId);
 		model.addAttribute("person", personPS);
-		return "person/resumeWriteForm";
+		return "person/resumeSaveForm";
 	}
 
-	@PostMapping("/save/resume/{id}")
+	@PostMapping("/save/resume/{personId}")
 	public @ResponseBody CMRespDto<?> resumeWrite(@RequestBody ResumeWriteDto resumeWriteDto,
 			@PathVariable Integer personId) {
 		personService.이력서등록(resumeWriteDto, personId);

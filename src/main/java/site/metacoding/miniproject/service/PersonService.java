@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject.domain.person.Person;
 import site.metacoding.miniproject.domain.person.PersonDao;
 import site.metacoding.miniproject.domain.person_skill.PersonSkillDao;
+import site.metacoding.miniproject.domain.resume.Resume;
 import site.metacoding.miniproject.domain.resume.ResumeDao;
 import site.metacoding.miniproject.domain.user.User;
 import site.metacoding.miniproject.domain.user.UserDao;
@@ -29,16 +30,17 @@ public class PersonService {
 	}
 
 	public ResumeFormDto 이력서내용가져오기(Integer personId) {
+		System.out.println(personId);
 		Person person = personDao.findById(personId);
-		ResumeFormDto resumeFormDto = new ResumeFormDto(person.getPersonName(), person.getPersonEmail(),
-				person.getDegree(),
-				personSkillDao.findByPersonId(personId));
+		ResumeFormDto resumeFormDto = new ResumeFormDto(personId, person.getPersonName(), person.getPersonEmail(),
+				person.getDegree(), personSkillDao.findByPersonId(personId));
 		return resumeFormDto;
 
 	}
 
 	public void 이력서등록(ResumeWriteDto resumeWriteDto, Integer personId) {
-		resumeDao.insert(resumeWriteDto.toEntity(personId));
+		Resume resume = resumeWriteDto.toEntity(personId);
+		resumeDao.insert(resume);
 	}
 
 }
