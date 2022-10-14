@@ -18,10 +18,10 @@
 
 	<insert id="insert">
 		INSERT INTO company(user_Id, company_Name,
-		company_Email, company_Phone,
+		company_Email, company_Phone,tech,
 		history, address, introduction, created_At)
 		VALUE(#{userId}, #{companyName}, #{companyEmail}, #{companyPhone},
-		#{history}, #{address}, #{introduction}, now())
+		#{tech}, #{history}, #{address}, #{introduction}, now())
 	</insert>
 
 	<delete id="deleteById">
@@ -45,7 +45,7 @@
 		SELECT COUNT(subject_id) AS recommend_count , FIRST.*
 		FROM recommend LEFT OUTER JOIN (SELECT company.user_id,
 		company.company_id, company.company_name,company.address,
-		notice.salary
+		notice.salary, company.tech
 		FROM company LEFT OUTER JOIN notice
 		ON company.company_id = notice.company_id) FIRST
 		ON recommend.subject_id = FIRST.user_id
