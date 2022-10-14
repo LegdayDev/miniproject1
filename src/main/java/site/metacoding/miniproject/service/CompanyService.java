@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import site.metacoding.miniproject.domain.company.CompanyDao;
 import site.metacoding.miniproject.domain.user.User;
 import site.metacoding.miniproject.domain.user.UserDao;
+import site.metacoding.miniproject.web.dto.request.CompanyInsertDto;
 import site.metacoding.miniproject.web.dto.request.CompanyJoinDto;
 import site.metacoding.miniproject.web.dto.response.CompanyRecommendDto;
 
@@ -18,15 +19,25 @@ public class CompanyService {
 
 	private final CompanyDao companyDao;
 	private final UserDao userDao;
-	
-	@Transactional(rollbackFor = {RuntimeException.class})
+
+	@Transactional(rollbackFor = { RuntimeException.class })
 	public void 기업회원가입(CompanyJoinDto companyJoinDto) {
 		userDao.insert(companyJoinDto.toUser());
 		User userPS = userDao.findByUsername(companyJoinDto.getUsername());
 		companyDao.insert(companyJoinDto.toCompany(userPS.getUserId()));
 	}
+
 	public List<CompanyRecommendDto> 기업추천리스트보기() {
-		
+
 		return companyDao.findToRecommned();
+	}
+
+	public CompanyInsertDto 기업이력등록(Integer CompanyId, CompanyInsertDto companyInsertDto) {
+		companyDao.companyInsert(CompanyId, companyInsertDto);
+		return companyInsertDto;
+	}
+
+	public Integer 컴퍼니아이디로찾기(Integer companyId) {
+		return companyDao.findById(companyId);
 	}
 }
