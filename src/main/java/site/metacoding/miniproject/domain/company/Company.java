@@ -32,6 +32,7 @@ public class Company {
 		this.history = history;
 		this.tech = tech;
 		this.address = address;
+		this.ceoName = companyName;
 		this.introduction = introduction;
 	}
 }
